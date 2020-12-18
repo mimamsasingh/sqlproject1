@@ -1,0 +1,51 @@
+﻿Project: SQL 
+Query codes
+
+
+Query no 1 ) which albums have the highest unit price?
+code: SELECT am.AlbumId,am.Title, sum(t.UnitPrice) avg_price
+from album am
+join Track t
+on am.AlbumId=t.AlbumId
+group by am.AlbumId,am.Title
+order by avg_price desc
+limit 20 ;
+
+
+Query no 2) which customers have spent the most?
+Code :select  c.CustomerId ,c.FirstName,c.LastName,sum(i.Total) total_spent
+from Customer c
+join Invoice i
+on c.CustomerId=i.CustomerId
+group by c.CustomerId
+order by total_spent desc
+limit 20 ;
+
+
+
+
+
+
+Query no 3) which employees have the highest no of customers?
+Code :select  e.EmployeeId ,e.FirstName,e.LastName,count(*) no_of_customers
+from Employee e
+join Customer c
+on e.EmployeeId=c.SupportRepId
+
+
+group by e.EmployeeId
+order by no_of_customers desc ;
+
+
+
+
+Query no 4)which is the most bought album
+Code : select a.Title,count(a.AlbumId) no_of_album
+from Album a
+join Track t
+on a.albumid=t.AlbumId
+join InvoiceLine il
+on il.TrackId=t.TrackId
+group by a.Title
+order by no_of_album DESC
+limit 20;
